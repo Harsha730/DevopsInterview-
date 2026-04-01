@@ -1,0 +1,33 @@
+Crashloopbackoff 
+Statufull demon deployment 
+If application down in production what you will do 
+When do get status as pending in pod 
+Configmap vs environmental variables 
+Liveness/ readiness 
+How auto scaling appends
+Architecture 
+
+Docker file 
+Explain file 
+Cmd entry point difference 
+Image size decrease 
+Multi stage image 
+Create the image 
+
+Stages, what type of pipeline
+Security sonarqube 
+Explain pipeline stages in your project 
+
+AWS 
+Load balancer 
+Vpc 
+Hpc/vpc
+Terraform manual create 
+Terraform file structure in your project 
+Statefile where you will  storage 
+
+
+Networking 
+Onprime server 
+Vpc to vpc connect 
+
