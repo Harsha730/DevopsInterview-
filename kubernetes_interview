@@ -1,0 +1,146 @@
+1.Explain the Kubernetes architecture (Master components, Node components).
+2. What is a Pod? How is it different from a container?
+3. Explain Deployments, ReplicaSets, StatefulSets, and DaemonSets.
+4. What is the difference between ClusterlP, NodePort, and LoadBalancer services?
+5. How does Kubernetes handle scaling (Horizontal Pod Autoscaler vs. Vertical Pod Autoscaler)?
+ Configuration & Management
+1. What is a ConfigMap and Secret? When would you use each?
+2.How do you perform rolling updates and rolbacks?
+3.How do you manage environment-specific configurations in Kubernetes?
+4.Explain resource requests and limits. Why are they important?
+Networking & Storage
+1. How does Kubernetes networking work? Explain CNI (Container Network Interface).
+2. How do services discover pods in Kubernetes?
+3. What are Persistent Volumes (PV) and Persistent Volume Claims (PVC)?
+4. Explain the difference between ephemeral storage and persistent storage.
+5. What is a StorageClass in Kubernetes?
+日 Security & Access Control
+1. What is RBAC(Role-Based Access Control) in
+Kubernetes?
+2.How do you secure secrets in Kubernetes?
+3. What are Network Policies and how do they work?
+4.How do you implement pod security (PodSecurityContext, SecurityContext)?
+ Troubleshooting & Monitoring
+1.How do you debug a failing pod?
+2.How do you check logs and events in Kubernetes?
+4.How do you implement pod security (PodSecurityContext, SecurityContext)?
+F Troubleshooting & Monitoring
+1. How do you debug a failing pod?
+2.How do you check logs and events in Kubernetes?
+3. What tools would you use for monitoring Kubernetes clusters?
+4. How do you troubleshoot networking issues between pods?
+E Advanced & Practical Scenarios
+1. Explain the difference between Deployment and StatefulSet with use-cases.
+2.How do you perform blue-green or canary deployments in Kubernetes?
+3. How would you handle persistent data in a highly available Kubernetes cluster?
+4.Explain how you would design a multi-tenant Kubernetes cluster.
+5. What is Helm and how do you use it for application
+deployment?
+6.Explain how Kubernetes integrates with CI/CD pipelines
+(e.g, Jenkins, ArgoCD)
+ Cloud & Real-World Context
+1. How does Kubernetes differ when deployed on AWS, Azure, or GCP?
+2.How do you manage autoscaling in a cloud Kubernetes environment?
+3. How do you handle backup and disaster recovery for
+Kubernetes workloads?
+4. What is the difference between managed Kubernetes services (EKS, AKS, GKE) and self-managed clusters?
+
+🔷 1. Kubernetes Architecture
+👉 Answer:
+“Kubernetes follows a master-worker architecture. The control plane manages the cluster, and worker nodes run the applications.
+The control plane includes:
+API Server, which is the entry point for all communication
+etcd, which stores the cluster state
+Scheduler, which assigns pods to nodes
+Controller Manager, which ensures the desired state is maintained
+On the worker node side:
+Kubelet runs and manages pods
+Kube-proxy handles networking
+Container runtime runs the containers
+So overall, the control plane makes decisions, and nodes execute them.”
+
+🔷 2. What is a Pod?
+👉 Answer:
+“A Pod is the smallest deployable unit in Kubernetes. It can contain one or more containers that share the same network and storage.
+The key difference is that containers run applications, while Pods are Kubernetes’ way of managing those containers together.”
+
+🔷 3. Deployment, ReplicaSet, StatefulSet, DaemonSet
+
+👉 Answer:
+“A Deployment is used for stateless applications and manages ReplicaSets to ensure the desired number of pods are running.
+A ReplicaSet ensures a fixed number of pod replicas.
+A StatefulSet is used for stateful applications like databases where each pod has a stable identity and storage.
+A DaemonSet ensures that a pod runs on every node, commonly used for logging or monitoring agents.”
+
+🔷 4. Service Types
+👉 Answer:
+“ClusterIP is used for internal communication within the cluster.
+NodePort exposes the service on a specific port of each node, making it accessible externally.
+LoadBalancer provisions an external load balancer through the cloud provider to expose the service publicly.”
+
+🔷 5. HPA vs VPA
+👉 Answer:
+“HPA scales the number of pods based on metrics like CPU usage, while VPA adjusts the CPU and memory resources of existing pods.
+So HPA scales horizontally, and VPA scales vertically.”
+
+🔷 ConfigMap vs Secret
+👉 Answer:
+“ConfigMaps store non-sensitive configuration like environment variables, while Secrets store sensitive data like passwords and tokens.
+Secrets are base64 encoded and can also be encrypted for better security.”
+
+🔷 Rolling Updates & Rollbacks
+👉 Answer:
+“Kubernetes supports rolling updates by gradually replacing old pods with new ones, ensuring zero downtime.
+If something goes wrong, we can rollback to the previous version using kubectl rollout undo.”
+
+🔷 Resource Requests & Limits
+👉 Answer:
+“Requests define the minimum resources a pod needs, and limits define the maximum it can use.
+This helps Kubernetes schedule pods efficiently and prevents any pod from consuming too many resources.”
+
+🔷 Networking (CNI)
+👉 Answer:
+“Kubernetes networking gives each pod a unique IP and allows direct communication between pods.
+CNI plugins like Calico or Flannel handle how networking is implemented.”
+
+🔷 Service Discovery
+👉 Answer:
+“Services discover pods using labels and selectors, and Kubernetes provides DNS-based service discovery using CoreDNS.”
+
+🔷 PV & PVC
+👉 Answer:
+“A Persistent Volume is actual storage, and a Persistent Volume Claim is a request for that storage by a pod.
+This abstraction decouples storage from applications.”
+
+🔷 RBAC
+👉 Answer:
+“RBAC controls who can access what resources in Kubernetes using roles and role bindings.”
+
+🔷 Network Policies
+👉 Answer:
+“Network Policies act like firewalls and control traffic between pods based on rules.”
+
+🔷 Debugging Pods
+👉 Answer:
+“To debug a failing pod, I check:
+pod status using describe
+logs using kubectl logs
+and sometimes exec into the pod to investigate further”
+
+🔷 Monitoring Tools
+👉 Answer:
+“Prometheus is used for metrics collection, Grafana for visualization, and ELK stack for logging.”
+
+🔷 Deployment vs StatefulSet (Important!)
+👉 Answer:
+“Deployments are for stateless apps where pods are interchangeable.
+StatefulSets are for stateful apps where each pod has a unique identity and persistent storage, like databases.”
+
+🔷 Helm
+👉 Answer:
+“Helm is a package manager for Kubernetes that helps deploy applications using reusable templates called charts.”
+
+🔷 Managed vs Self-Managed
+👉 Answer:
+“In managed Kubernetes like EKS, AKS, or GKE, the cloud provider manages the control plane.
+In self-managed clusters, we are responsible for everything including setup, upgrades, and maintenance.”
