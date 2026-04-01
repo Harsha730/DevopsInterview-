@@ -1,0 +1,45 @@
+Cd ---- To change the directory
+date ---- To display date and time
+Cal ---- To display calender
+ls -s --- To display file with size
+Passwd --- To change the password of vm 
+Cd - To enter the last opend filepath
+Cp ~ --- To cp file from the existing folder 
+Sudo su ------ To root user
+Sudo su  username ------ To get back normal user
+Find . -name "filename" --- To find the filename
+Top ---- To check the cpu & file using
+Ls -lrth ---- To check file size and permission
+Ls -lth --- To check file size and permission with Today date wise
+Head -l ---- To see the first 10 lines in file
+Tail -l ----- To see the last 10 lines in file 
+grep --- To get the file with name or msg 
+grep -E  --- To get correct file 
+Cp --- To copy the file 
+Mv --- To move the file 
+rm ---- To remove the file
+Kill -9 processname ---- To kill the process in terminal
+Sudo Chmod 777 filename --- To give the permission to the file or folder 
+Sudo chown filename --- To change user or owner of the file or folder
+Cat --- To view the file in Terminal
+gedit filename --- To view in other app like Texteditor
+ls --- To check How many files in the folder
+tar -xf --- Extract all files from archive.tar
+df ---- To display the amount of available disk space for file systems
+mkdir --- To create Directory 
+Corn --- cron to schedule jobs, also known as cron jobs
+Ping networkname --- To check the network connection from terminal
+Vi filename --- To edit the file in terminal
+gzip  ---- To zip the file with extension .gz
+gzip -d filename --- To unzip the file
+Pwd --- To check present working directory
+Ps -wfw process id ---- It will show the details of process
+
+grep -oP '\d+' is used to grep the numbers 
+
+To change the hostname 
+1. Hostnamectl --- To check 
+2. Hostnamectl set-hostname yourname ---To change the hostname
+
+Update-java-alternatives -l
+Sudo update-alternatives --config java
