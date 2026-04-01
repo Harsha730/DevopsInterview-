@@ -1,0 +1,287 @@
+
+This how pod is created and communication happens in master and work nodes
+
+1. Kubectl apply -f deployment.yml  
+Kubectl send the information to the kude api-server whichs saves the new deployment spec in etcd 
+2. Save new state --- etcd 
+3. Checks for changes ---- controller-manager --- api-server 
+4. Watch for unassigned pods ---- sheculder--- api-server 
+
+5. Notify about pod with nodename---- api-server 
+
+6. Assign pode to node ---- sheculder ---- api-server 
+
+7. Save neww state ---api-server--- etcd
+8. Look for newly assigned pod ----kubelet
+9. Bind the pod to node ---- api-server --- kublet
+10. Start container ----kubelet--- container-runtine 
+11. Update pod status---kubelet ---api-server
+12. Save the state ---etcd 
+
+
+Top level or root level properties to write the yaml file 
+
+apiversion: version of kubernetes v1
+kind: type of object to create
+metadata: about the object like name,lables, etc
+Spec:  is a dictionary add property under it called containers.
+
+Kind             version 
+POD.                 V1
+Service.            V1
+Replicaset.       apps/v1
+Deployment.     apps/v1
+
+Kubectl create -f example.yaml
+Kubectl get pods 
+Kubectl get pods -o wide 
+Kubectl describe pod example 
+Kubectl  delete pod example
+
+To create a yaml file using command 
+Kubectl run redis --image=redis123 --dry-run=client -o yaml > redis.yaml 
+
+Loda balancing & scaling 
+
+Thera are two similar types replication controller and replica set both are same but not same because replication controller is older and replica set is new recommended way
+
+To create a replicationcontroller write yaml file 
+apiversion: v1
+Kind: Replicationcontroller 
+metadata: 
+     name: myapp-c 
+     lables:
+         app: myapp
+          type: front-end 
+spec: 
+     template: 
+          metadata: 
+             Same as above 
+          Spec: 
+               Container: 
+                - name:  nginx-container
+                   Image: nginx
+ replicas:  3 
+
+To create replica set 
+
+Kubectl create -f filename
+Kubectl get replicationcontroller
+
+Replicaset.yaml 
+
+apiversion: apps/v1
+kind: ReplicaSet
+metadata: 
+     Same as above 
+spec:
+    Same as above 
+     selector:
+         matchlables:
+               type: front-end 
+
+The difference between replicationcontroller and replica set is selector with the help of selector we can easy manage the replicas before created pods with matchlables 
+
+Kubectl create -f filename 
+Kubectl get replicaset
+
+Labels and selectors 
+
+The role of the replica set to monitor the pod and if any of them were to fail, deploy new onces
+
+How the replica set know which pod to monitor there the lables comes as filter for replica set 
+This way the replica set knows which set to monitor 
+
+To update the count of replicas just remove the number and update with new number 
+Later
+kubectl replace -f filename 
+
+Another way to up date 
+
+Kubectl scale --replicas=6 -f filename
+Kubectl delete replicaset name
+
+Deployment 
+That comes under higher in the hierarchy 
+The deployment provideds us the capability to upgrade the underlying instances seamlessly using rolling updates, undo changes, and pause and resume changes as required.
+
+Deployment.yaml
+
+apiversion: apps/v1
+Kind: Deployments
+metadata:  same as replicas set 
+
+Kubectl create - f deployment.yaml
+Kubectl get deployments 
+
+Advantages of deployment 
+You can see all 
+Kubectl get all 
+
+Environment variables 
+
+To set an environment variable use the env property in spec container env 
+Env is an array so every item under the env property starts with a dash each item has name and property.
+env: 
+     - name: app_colour
+        Vale: pink 
+         Valuefrom: 
+                 ConfigMapKeyRef:
+         Valuefrom: 
+                 SecretKeyRef: 
+
+Env has value types like 
+ 1. Plain key value 
+ 2. Configmap
+ 3. Secrets
+
+Configmap
+
+ Configmap are used to pass configuration data
+In the form of key value data 
+When  a pod is created inject the configmap into the pod 
+ To create the configmap we have two ways 
+Imperative and declarative 
+
+Kubectl create configMap 
+             <Confing name > --from-literal =<key>=<value>
+
+Kubectl get configmapd
+Kubectl describe configmaps 
+To use the configMap
+
+Envfrom: 
+      - configMapRef:
+                   name: app-config 
+
+Secrets
+
+Secrets are used to store sensitive information like passwords or Keys 
+They are similar to configMap except that they're stored in an encoded format 
+Create scrects and inject the pod 
+There are two ways of creating a secret
+
+Imperative kubectl create secret generic 
+   <Secret-name> --from-literal=<key>=<value>
+Declarative kubectl create -f 
+
+Secrets.yaml 
+Apiversion v1
+Kind secret
+Metadata 
+      Name app-secrect
+Data 
+     Db_host MySQL
+     Db_user root
+     Db_password. Paswrd
+
+We can write data public or text format need to encrypt 
+
+To encrypt use 
+echo -n 'mysql' | base64
+bXlzcWw= 
+
+To decode encrypted data 
+echo -n 'bXlzcWw='  | base64 --decode
+MySQL 
+
+Inject into pod 
+envFrom
+     - secretRef: 
+               name : app-secret
+
+Kubectl create -f filename 
+Kubectl get secrets
+Kubectl describe secrets 
+
+Securitycontext 
+
+A security context defines privilege and access control settings for a pod or container 
+Security context settings include, but are not limited to
+Discretionary Access control:  permission to access an object, like a file, is based on user(UID)
+and group ID (GID)
+
+Used in yaml file like 
+
+securityContext 
+      runAsUser : 1000
+      runAsGroup: 3000
+
+We can use capabilities to add like 
+ securityContext 
+      Capabilities: 
+        Add : ["sys_admin",]
+
+Service account 
+
+The concept of service account is linked to other security-related concepts in kubernetes 
+Such as authentication, Authorization, role-based access control, etc 
+
+There are two types of service account 
+1. User account is used by humans 
+2. Service accounts are used by machines.
+
+User account should be accessing the cluster to perform administrative tasks, or a developer accessing the cluster to deploy applications etc. 
+
+A service account could be an account used by application to interact with the kubernetes cluster .
+Example: monitoring application like Prometheus 
+Uses a service account to pull the kubernetes api
+For performance Matrix.
+An automated build tool like Jenkins uses service account to deploy applications on kubernetes cluster.
+
+Kubectl create serviceaccount dashboard-sa
+Kubectl get serviceaccount 
+Kubectl describe serviceaccount dashboard-sa 
+
+Creates the screct token to view the screct token
+Kubectl describe secret dashboard-sa-token-kbbdm
+This is processe of creating new service account and use it 
+
+
+DGR uploads Common errors 
+
+1: What causes the error crashloopbackoff in a kubernetes pod and how do you troubleshoot it?
+
+Pod is starting crashing and kubernetes is restarting it repeatedly 
+Check the logs kubectl. Logs 
+Describe the pod
+Incorrect environment variables 
+Failed dependencies
+Mis configurations in container's command or arguments
+
+2: why might a kubernetes pod be stuck in the pending State and how do you reslove it?
+
+Waiting for resources tobe allocated.
+Lack of enough cpu and memory check the resources using kubectl describe nodes.
+Node affinity or taints prevent scheduling.
+Check nodes taints and pods affinity rules.
+Missing persistentvolmes.
+
+3: what is the error imagepullbackoff indicate, and how do you fix it?
+
+Unable to pull specified container image.
+Verify image name.
+Verify tag and register URL.
+Image registery is accessible.
+Credentials are configured correctly.
+Network connection to image registery.
+
+4: How do you reslove the Errimagepull error in kubernetes?
+
+Similar to imagepullbackoff.
+Specific to immediately failure in pulling image.
+Image name and tag are correct.
+Credentials are correctly referenced.
+Registery url is correct.
+Image is Available and no access restrictions.
+Registery url is correct.
+
+5: what might cause a pod to remain in the Terminating state indefinitely and how do you reslove it?
+
+Cannot gracefully shutdown the containers.
+Long terminationgarce period seconds
+You can force delete the pod 
+Kubectl delete pod podname --grace-period=0 --force 
+Finalizers that are preventing deletion
+Kubectl edit pod padname and deleting the finalizers section.
+Pod is accessible and no network issues.
