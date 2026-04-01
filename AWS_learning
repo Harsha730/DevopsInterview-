@@ -1,0 +1,129 @@
+Compute - EC2, Elastic Beanstalk, Lambda, ECS,Esk..
+Storage - s3, EBS, EFS, storage gateway..
+Database - RDS, DynamoDB, amazon DocumentDB
+Networking & content delivery - VPC, Direct Connect,...
+Security, identity & compliance - 
+Iam, kms, cloudhsm,
+Devops - cloudformation, codepipeline, cloudwatch, x-ray, cloudTrail,..
+Machine learning - amazon sagemaker, 
+
+Regions and availability zone :
+
+AWS provides 25+ regions around the world 
+If one goes down another will be active 
+If the user is from useast1 we can easy redirect the user to useast1 
+Low latency, 
+
+Iaas and paas :
+
+* Running application on data centre is called 
+Iass ( infrastructure as a service)
+* We will install the virtual machine, os, software and then manually deploy the application in there.
+* Use only infrastructure from cloud provider.
+Ex: using vm service to deploy your apps/databases Ec2 
+*  Cloud provider is responsible for: 
+      Hardware, networking & virtualization 
+ •. You are responsible for those 
+
+Paas ( platform as service )
+When you are using platform as service you are making use of platform provide by the cloud 
+Ex: AWS elastic beanstalk 
+Just go there and run your application 
+Scaling, hardware, networking, os, application runtime, load balancing.
+• You are responsible for configuration of application and services
+Application code if needed 
+Platform as a database are amazon RDS 
+
+Containers & Orchestration : 
+
+Microservices enterprises are heading towards 
+*Build small focused microservices 
+• Flexibility to innovate and build applications in different programming languages ( Go, java, python, etc ) 
+• but deployment becomes complex.
+• how can we have one way of deployment in micro 
+   enter containers
+ • Containers - Docker 
+ • create docker images for each microservice 
+ • docker images has all needs of a microservice 
+    • Application code and dependencies 
+    • runs the same way on any infrastructure 
+          * your local machine 
+          *  Corporate data centre
+          *   Cloud 
+   • Advantages 
+      • Docker container are light weight 
+         • Compared to vm as they do not have a                 guest os
+         * Docker provides isolation for containers 
+         * Docker is cloud neutral.
+         
+Container orchestration: 
+• Requirement I want 10 instances of microservice a container, 15 instances of microservice B container and soon..
+• Typical features :
+    • Auto scaling - scale containers based on demand 
+    • service discovery - Help microservices find one another 
+    • Load balance - Distribute load among multiple instances of a microservice 
+    • self Healing - Do health checks and replace failing instances 
+    • zero downtime deployments - Relase new versions without downtime.
+
+Container orchestration services:
+Using a container orchestration: 
+ 1: create a cluster 
+2: Deploy & orchestrate microservices
+• Managed kubernetes service: 
+   • Elastic kubernetes service ( AWS Eks)
+• Cloud specific services : 
+  Elastic container service ( AWS ECS)
+
+SERVERLESS :
+
+What do we think about when we build an application?
+• Where to deploy? What kind of server ? What os ?
+• how to we take care of scaling and availability?
+What if you don't need to worry about servers and focus on code ?
+Enter SERVERLESS 
+* Remember SERVERLESS doesn't mean no server 
+Serverless for me : 
+• You don't worry about infrastructure 
+• flexible scaling and automated high availability 
+Most  important : pay for use 
+Ideally zero request ==> zero cost 
+
+
+
+AWS codecommit - storing our code 
+AWS codepipeline - automating our pipeline from code to elastic beanstalk 
+AWS CodeBuild - building and testing our code 
+AWS CodeDeploy- deploying the code to EC2 instances (not Elastic Beanstalk)
+AWS CodeStar - manage software development activities In one place 
+AWS CodeArtifact - store, publish, and share software packages 
+AWS codeGuru - automated code reviews using Machine learning 
+
+
+Continuous Integration (CI)
+
+Developer push the code to a code repository often git, codecommit, bitbucket,..
+
+A testing/build server checks the as soon as it's pushed ( codeBuild, Jenkins CI,...)
+
+The developer gets feedback about the tests and checks that have passed/failed 
+
+So with this we can find the big early and we fix them early 
+Delivery faster as the code is tested 
+Deploy often 
+
+
+Continuous Delivery (CD)
+
+Developer Push the code to application servers 
+(CodeDeploy, Jenkins CD, spinnaker,..)
+
+Ensure that the software can be released reliably whenever needed 
+
+We ensure that deployments happen often and very quick and we shift away from a mentality 
+
+
+What is nacl ?
+What are different types of volumes in EC2, what are they used for?
+Tell me about data encryption?
+Server side encryption and client side encryption?
+
