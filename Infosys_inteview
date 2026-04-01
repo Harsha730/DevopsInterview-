@@ -1,3 +1,67 @@
+What are all the things you worked in AWS?
+What type of work it is?
+What is ec2?
+How will you create ec2 instance?
+What is vpc
+What is subnets? Where we will use private and public?
+How the communication happens to private subnet when it needs any update?
+What is nacl? Where we will use ?
+How will you enable firewall to private subnet?
+What is s3, route53, cloud watch?
+How did you configured cloud watch?
+What is load balancer, application balancer?
+What is regions ?
+How will make sure high available to your application?
+What is high availablity?
+What is terraform?
+Explain the cmd in terraform?
+What is the use of modules?
+What is the use of state file?
+What will you do if statefile got deleted?
+By using terraform what are all the services you have created?
+What is iam ? What is policy?
+Where you will use policies?
+What is ami?
+Have you worked on bash or python scripting? If yes what type of task you performed?
+How will you debug bash script?
+Explain the docket architecture?
+What is different between docker file and docker image
+Have you worked with docker Swarm?
+Explain kubernetes architecture? 
+What cicd ?
+What type of tool you used to Automate?
+Do you know Jenkins ?
+Have you worked on Jenkins pipeline?
+Do you have experience in scripted pipeline or declarative pipeline?
+Declarative pipeline explain the from starting?
+How will declare Dynamic variables?
+What is the use of shared libraries?
+What are all the phases in devops ?
+What is devops?
+Ci stages explain? Cd stages explain?
+What type of Build you worked ? What type of application you worked?
+What is maven ? How will you integrate?
+Explain maven cmd you used ?
+Did you worked on any 3rd party integration in Jenkins? How will you configured?
+How will integrate sonarqube?
+Do you have experience in devsecops?
+What is difference between devops and devsecops?
+Tell me any devsecops tool you have used or integrated?
+Do you know Ai ?
+Have you work on any Ai related?
+What type work it is?
+What is testing?
+Do you have experience in testing?
+What is manual testing?
+What is black box testing and white box testing?
+Explain the testing phases ?
+Do you experience in cloud testing?
+What is cloud testing?
+How will you test cloud infrastructure?
+What type of tool or code you use to test ?
+
+
+
 ☁️ AWS & Networking
 ❓ What kind of work have you done in AWS?
 Answer:
