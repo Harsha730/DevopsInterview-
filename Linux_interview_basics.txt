@@ -1,0 +1,445 @@
+1.What is Linux? What are all the min features?
+
+2.What is the difference between linux and Unix ?
+The primary difference is that Linux is open source and free, while UNIX is proprietary. Additionally, Linux is widely used for a variety of applications, whereas UNIX is primarily used in large enterprises.
+
+3. What is the Linux Kernel?
+The Linux kernel is the core of the Linux operating system. It acts as an interface between the computer's hardware and the software running on it.
+It manages hardware resources, enables process control, fil management, and system security.
+
+4.What is a shell in Linux?
+A shell in Linux is an Interface that allows users to Interact with the operating system by running commands.
+
+5.What are some common shells in Linux?
+Common Linux shells include Bash (Bourne-Again Shell), Tcsh, Zsh, and Ksh (Korn Shell).
+
+6.How do you create a new user in Linux?
+You can create a new user in Linux using the useradd or adduser command.
+
+sudo useradd -m -d /home/newuser -s /bin/bash -c "New User" -u 1001-g users -G sudo, adm -e 2025-01-01 new
+
+7. What is the root user in Linux?
+
+The root user is the superuser in Linux, with full administrative privileges to the entire system.
+
+root user
+/root home dir
+/ root dir
+
+8. Explain the file permissions in Linux.
+
+Linux file permissions Include read (r), write (w), and execute (x) for three categories: owner, group, and others.
+
+9: How do you change file permissions in Linux?
+
+File permissions are changed using the chmod command.
+
+chmod u=rwx,g=rx,o= file.txt
+
+10. What is a process in Linux?
+
+A process is an running instance of a program in Linux. Each process in Linux has a unique identifier called a Process ID (PID).
+
+11.How do you view active processes in Linux?
+
+You can view active processes using commands like ps, top, or htop.
+
+12.How do you kill a process In Linux?
+
+A process can be killed using the kill command followed by the process ID.
+
+kill PID
+
+13. What is a daemon in Linux?
+
+A daemon is a background process that runs continuously and typically starts at boot.
+
+14. What is the difference between soft link and hard link in Linux?
+
+A soft link is a pointer to a file, while a hard link is a direct mirror of the file. Deleting the original file affects a soft link but not a hard link.
+
+15. What is the use of the df command in Linux?
+
+The df command is used to display disk space usage of file systems.
+
+16. What does the free command do in Linux?
+
+The free command displays the total amount of free and used physical RAM and swap memory in the system.
+
+17. Explain the purpose of the grep command.
+
+grep is used to search text or searches the given file for lines containing a match to the given strings or words.
+
+grep "string" file.txt
+
+18. What is a symbolic link in Linux?
+
+A symbolic link, or symlink, is a file that points to another file or directory. It's a reference that can be used to access the target file
+
+19. What are inodes in Linux?
+
+An inode is a data structure on a filesystem that stores information about a file except its name or actual data.
+
+Every file or directory is associated with an Inode, which is identified by an inode number in the filesystem. This inode number is a unique identifier within the filesystem
+
+20.What is the purpose of the crontab in Linux?
+
+crontab is used to schedule commands to be executed periodically. It holds the list of scheduled tasks
+
+21.How can you find the IP address of a Linux server?
+
+You can find the IP address using commands like Ifconfig or ip addr show.
+
+22.Explain the purpose of the sshd service.
+
+sshd is the SSH daemon that allows secure remote connections to the server.
+
+23.How do you check the status of a service in Linux?
+
+The status of a service can be checked using systemctl status servicename.
+
+24.What is the purpose of the /etc/passwdFile?
+
+The /etc/passwd file contains user account information.
+
+25.How do you search for a file in Linux?
+
+You can search for a file using commands like find or locate.
+
+Find / .name filename
+
+26. What is the purpose of the iptables?
+
+iptables is a command-line utility in Linux used for configuring network packet filtering rules.
+
+With iptables, you can define rules for how incoming, outgoing, and forwarding network packets should be ha and manipulated.
+
+27. What are environment variables in Linux?
+
+An environment variable is a named value that can affect the way running processes behave on a computer.
+
+They are part of the environment in which a process runs.
+
+printenv
+
+28.How do you set an environment variable in Linux?
+
+Environment variables can be set using the export command, e.g., export VARNAME=value
+
+29.What is the purpose of the /etc/shadow file?
+
+The /etc/shadow file stores actual password data in an encrypted format for user's accounts with additional properties related to user password.
+
+30. Explain the use of the ping command.
+
+ping is used to test the reachability of a host on an IP network and to measure the round-trip time for messages sent to the destination computer.
+
+32.What is the difference between wget and curl?
+
+Both are command-line tools for transferring data over the network.
+
+wget is simpler and designed to download files, whereas curl offers more protocols and features.
+
+protocols including HTTP, HTTPS, FTP, FTPS, SCP, SFTP, TFTP, LDAP, LDAPS, DICT, TELNET, FILE, IMAP, POP3, SMTP, and SMB
+
+33.How do you check disk usage in Linux?
+
+Disk usage can be checked using the df and du commands
+
+34. Explain the use of the tail command.
+
+tail displays the last part of files. It's commonly used to view the end of log files.
+
+35. What is the purpose of the xargs command?
+
+xargs is used to build and execute command lines from standard input. It's useful for combining commands in a pipeline.
+
+find. -name "*.txt" | xargs rm
+
+36.How do you schedule a task in Linux?
+
+Tasks can be scheduled using cron jobs, which are defined in crontab files.
+
+*/15 **** /path/to/command
+
+37.What is a package manager in Linux?
+
+A package manager is a collection of tools that automates the process of installing, upgrading, configuring, and removing software packages in a consistent manner
+
+38.Name some common package managers in Linux.
+
+Common package managers include apt (for Debian/Ubuntu), yum (for RHEL/CentOS), and zypper (for openSUSE).
+
+39.What is the difference between yum and rpm?
+
+yum is a front-end tool for package management that automatically resolves dependencies,
+
+while rpm is a lower-level tool that manages individual packages without automatically handling dependencie
+
+40.How do you list all installed packages in Linux?
+
+This can be done using the package manager's list command, like
+
+apt list --installed in Debian/Ubuntu 
+rpm -qa in RHEL/CentOS.
+
+41.What is a Linux service?
+
+A service in Linux is a program that runs in the background, typically initiated at system startup
+
+42.How do you start, stop, and restart services in Linux?
+
+Services are managed using the systemctl command, e.g., systemctl start servicename, systemctl stop servicename, and systemctl restart servicename.
+
+43.Explain the purpose of the /etc/fstab file.
+
+/etc/fstab is a system configuration file that contains information about different file systems and how they are mounted.
+
+44.What is LVM and what are its advantages?
+
+LVM stands for Logical Volume Manager. It allows for flexible disk management by creating, resizing, and deleting logical volumes.
+
+45. How do you create a simple script in Linux?
+A simple script can be created using a text editor, starting with the shebang line (#!/bin/bash for a bash script), followed by shell commands. The script file should be made executable with chmod +x scriptname
+
+46. What is the use of the nohup command?
+
+nohup is used to run a command/script in the background even after logging out from the shell.
+
+47. Explain the use of the sed command.
+
+sed (stream editor) is used for parsing and transforming text, typically used in pipelines.
+
+sed 's/Linux/UNIX/g' example.txt
+
+48. What is the purpose of the /var directory?
+
+The /var directory contains variable data like system logs (/var/log), mail (/var/mail), and temporary files required for running applications
+
+49. How do you monitor system performance in Linux?
+
+System performance can be monitored using tools like
+
+top,
+htop,
+vmstat,
+iostat, and sar.
+
+50. Explain the purpose of the ssh command.
+
+ssh (Secure Shell) is a protocol used to securely access and manage systems remotely.
+
+51. How do you secure an SSH server?
+
+SSH security can be enhanced by disabling root login, changing the default port, using key-based authentication, and configuring firewalls.
+
+52.What is the purpose of the /home directory?
+
+The/home directory contains the personal directories of all users
+
+53.Explain the use of the awk command.
+
+awk is a powerful programming language and tool used for pattern scanning and processing.
+
+awk '{print $2}' data.txt
+
+54.How do you find the amount of free memory in the system?
+
+Free memory can be checked using the free command or by examining the contents of /proc/meminfo
+
+55.What is swap space in Linux?
+
+Swap space is a portion of a hard disk drive (HDD) that is used for virtual memory when the physical memory (RAM) is full.
+
+56.How do you create a swap file in Linux?
+
+A swap file can be created using
+ dd to allocate space,
+ mkswap to set up a Linux swap area, and swapon to enable the swap file.
+
+57.What is the purpose of the /etc/hosts file?
+
+The /etc/hosts file is used to map hostnames to IP addresses
+
+58. How do you set a static IP address in Linux?
+
+A static IP address is set by editing network configuration files or using network management tools or commands, depending on the distribution.
+
+Ex: nmcli
+
+59.Explain the purpose of the nslookup command.
+
+nslookup is a network administration command-line tool used for querying the Domain Name System (DNS) to obtain domain name or IP address mapping.
+
+60.What is the difference between iptables and firewalld?
+
+iptables is a traditional form of Linux firewall, and firewalld is a more dynamic, front-end friendly tool that interfaces with iptables configurations.
+
+61.What is dmidecode command used for?
+
+The dmidecode command In Linux Is used to retrieve detailed Information about the system's hardware from the BIOS/DMI table in a human-readable format.
+
+62.What are runlevels in Linux?
+
+Runlevels are predefined modes that a Linux system can run in, each with a specific purpose, like single-user mode, multi-user mode, GUI mode, etc. check using runlevel command
+
+0: Halt/Shut down the system
+
+5: Full multi-user mode (with graphical user interfag
+
+63. How do you change runlevels?
+
+Runlevels can be changed using the init/telinit command or systemctl in systemd-based systems
+
+64.What is the purpose of the /boot directory?
+
+The /boot directory contains essential files needed to boot the system, including the Linux kernel, initial RAM disk images, and the bootloader configuration.
+
+65. Explain the purpose of the rsync command.
+
+rsync is used for fast and versatile file copying, both locally and remotely. It's commonly used for backups and mirroring.
+
+66.What is a Linux distribution?
+
+A Linux distribution is a version of the operating system that includes the Linux kernel, a package management system and other supporting software and libraries.
+
+67. Name some popular Linux distributions.
+
+Popular distributions include Ubuntu, Fedora, CentOS, Debian, Red Hat Enterprise Linux (RHEL), and openSUSE
+
+68.How do you change the hostname of a Linux system?
+
+The hostname can be changed using the hostnamectl command or by editing /etc/hostname.
+
+69.: What are system logs and where are they located?
+
+System logs record various activities of the operating system. They are typically located in the /var/log directory.
+
+70.Explain the purpose of the netstat command.
+
+netstat is used to display network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+
+71. How do you add a new disk to a Linux system without rebooting?
+
+Scan the SCSI bus using commands like echo "---" > /sys/class/scsi_host/host0/scan
+Partitioning (ex/dev/sdb using fdisk)
+Formatting the new disk (using mkfs)
+Mount
+
+72.  What is the purpose of the /etc/sysconfig directory?
+
+/etc/sysconfig contains scripts and configuration files that manage the startup of services and configure aspects of system behavior.
+
+73.How do you update all packages in Linux?
+
+This can be done using the package manager, e.g., apt-get update && apt-get upgrade for Debian/Ubuntu or yum update for RHEL/CentOS.
+
+74.What are the common network configuration files in Linux?
+
+Common files include /etc/network/interfaces (Debian/Ubuntu), /etc/sysconfig/network-scripts/ifcfg-etho (RHEL/CentOS), and /etc/netplan/*.yaml (newer Ubuntu versions).
+
+75. How do you change the default runlevel?
+
+The default runlevel can be changed by editing the /etc/inittab file in SysVinit systems or by using systemctl set-default in systemd systems.
+
+76. What is the purpose of the /etc/resolv.conf file?
+
+/etc/resolv.conf contains information about DNS servers and search domains for the host.
+
+77.How do you find which process is using a particular file?
+
+This can be found using the Isof command, which lists open files and the processes using them.
+
+78.: What is the purpose of the dmesg command?
+
+dmesg displays the kernel-related messages and helps in troubleshooting hardware and driver related issues.
+
+79.Explain the purpose of the usermod command.
+
+usermod is used to modify a user's system properties, such as username, home directory, and group.
+
+80.How do you find the size of a directory in Linux?
+
+The size of a directory can be found using the du command.
+
+du path
+
+81. What is the purpose of the /etc/cron.* directories?
+
+These directories contain scripts that are run periodically at fixed times, dates, or intervals by the cron daemon.
+
+82. How do you change the priority of a process in Linux?
+
+The priority of a process can be changed using the renice command.
+
+83.What is the purpose of the mount command?
+
+mount is used to attach a filesystem to a directory in the filesystem tree.
+
+84.Explain the purpose of the umask command.
+
+umask sets the default file creation permissions for new files and directories.
+
+85. What is the purpose of the /opt directory?
+
+/opt is used for storing optional software and packages that are not part of the default installation
+
+86.How do you find out which processes are listening on a specific port?
+
+This can be found using netstat -tuln or ss -tuln.
+
+87.Explain the purpose of the dig command.
+
+dig (Domain Information Groper) is a network administration command-line tool for querying DNS name servers.
+
+88.What is quota in Linux?
+
+A quota is a system feature used to limit the amount of disk space and/or the number of files (inodes) a user or group can use.
+
+89. How do you set a quota for users in Linux?
+
+Quotas are set using the quota and edquota commands, and by modifying filesystem configuration.
+
+90. What is the purpose of the /usr directory?
+
+/usr contains user utilities and applications, supporting files for the operating system
+
+91.How do you find the hardware details of your system?
+
+Hardware details can be found using commands like Ishw, Iscpu, Isblk, and lspci.
+
+92. What is the purpose of the sysctl command?
+
+sysctl is used to modify kernel parameters at runtime.
+
+93.How do you check the kernel version of your Linux system?
+
+The kernel version can be checked using uname -r.
+
+94.What is the difference between a service and a daemon in Linux?
+
+A daemon is a background process that runs continuously, often started at boot time. A service is a process that performs a specific function and may not run continuously.
+
+95. How do you redirect output in Linux?
+
+Output can be redirected using the > for standard output and 2> for standard error.
+
+96.What is the purpose of the /proc directory?
+
+/proc is a virtual filesystem that provides a mechanism to access kernel and process information in a file-like structure
+
+97. Explain the purpose of the tr command.
+
+tr is used for translating or deleting characters from standard input and writing to standard output.
+
+98. What is the difference between PATH and LD_LIBRARY_PATH?
+
+PATH is an environment variable specifying a set of directories where executable programs are located. LD_LIBRARY_PATH is used to specify a set of directories where libraries should be searched for first, before the standard set of directories.
+
+99. How do you create a read-only file in Linux?
+
+A file can be made read-only using the chmod command, for example, chmod 444 filename
+
+Cpu usage and memory usage 
+Xsos -m
+
