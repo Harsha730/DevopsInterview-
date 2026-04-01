@@ -1,0 +1,108 @@
+Continues Delivery: 
+Continues Delivery is a devops practice where developers commit their changes regularly to cm it's automatically compiled, tested and packeged and deployed in production environment.
+
+Benifits: 
+It's automates software release process 
+Improves developer productivity 
+Release software updates faster 
+
+
+
+
+Declarative pipeline...
+
+We have two types declarative and scripted 
+The main difference between script and declarative is starting it self we can see 
+For scripted 
+node{
+}
+Declarative pipeline line syntax 
+Pipeline {
+Agent any
+Stages {
+Stage{
+Steps{
+echo "Harsha"
+}
+}}
+}
+
+
+
+
+Ansible integration 
+
+Sudo yum install ansible 
+Ansible --version 
+Jenkins Global tool configuration 
+If installed you can see the ansible tool 
+If not installed go to the path 
+Plugin manager install ansible 
+Ansible name --- ansible 
+Path /usr/bin/
+
+To write playbook
+----
+- hosts: dev
+   become: true
+    tasks: 
+       - name: python-pip 
+          State: present
+        - name: install docker-py python module 
+           Pip:
+               name: docker-py
+                State: present
+         - name: start the container
+             docker_container: 
+                  name: hariapp
+                   Image: some image name 
+                   State: started 
+                   published_ports:
+                        - 0.0.0.0.8080:8080
+To use this file we have to configure in jenkins script 
+To generate this script we can use the pipeline syntax script ---> generate pipeline script 
+We can copy the script and use i Jenkins main file 
+
+
+
+If you want to use groovy syntax directly in declarative pipeline, you should warp that inside script block..
+
+Functions in jenkins
+ 
+We use def keyword 
+def call(name){
+        echo " Hey ${name}, How are you ?"
+}
+
+This is different script named as calculator
+def add(x,y){
+      echo " sum of ${x} and ${y} is ${x+y}
+}
+
+
+Jenkins shared libraries 
+
+Sharedlibs/vars/welcome.groovy
+
+1. Create a project in git and follow the standard folder structure and write one groovy script.
+2. Configure that shared library under jenkins.
+3. Manage jenkins--> Global pipeline libraries 
+This is the tool in jenkins
+As per details fill the tool section Like name and Git repo details.
+4. Now to use that library in the script 
+".   @Library('NAME OF THE LIBRARY') ."
+
+Pipeline{
+       agent  any
+       Stages{
+                Stage('Demo'){
+                        Steps{
+                           Welcome(Harsha Teki)
+                           Script{
+                                  Calculator.add(35+25)
+}
+}
+}
+}
+}
+
