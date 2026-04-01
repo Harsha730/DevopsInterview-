@@ -11,3 +11,83 @@ For monitoring and observability, I use tools like Prometheus and AWS CloudWatch
 One of the key projects I worked on involved migrating an application from JDK 8 to JDK 17 using Docker containers, where I resolved over 140 bugs and improved code coverage from 47% to 78%, which significantly enhanced application stability.
 Overall, my focus has been on automating infrastructure, improving CI/CD pipelines, optimizing deployments, and ensuring high availability of cloud applications.
 Currently, I’m looking for an opportunity where I can further leverage my experience in AWS, Kubernetes, Terraform, and DevOps automation to build scalable and reliable cloud platforms.
+
+
+🎤 Project Explanation (Best Answer)
+Project Overview
+In my current role at Tata Consultancy Services, I worked on telecom projects for Nokia and Ericsson, where we built and maintained cloud-based applications for network management and configuration systems.
+The main goal of the project was to automate infrastructure provisioning, implement CI/CD pipelines, containerize applications, and deploy them on Kubernetes clusters running on AWS to improve deployment speed, scalability, and system reliability.
+☁️ AWS Usage
+We used AWS as the primary cloud platform.
+EC2 – for hosting application services and build servers
+S3 – for storing build artifacts and logs
+IAM – for role-based access between services
+VPC – for secure networking between services
+EKS – to run Kubernetes clusters for containerized applications
+CloudWatch – for monitoring logs and metrics
+Example answer:
+I provisioned and managed infrastructure on AWS including EC2 instances, VPC networking, IAM roles, and EKS clusters to run our containerized applications.
+🏗 Terraform (Infrastructure as Code)
+We used Terraform to automate infrastructure provisioning.
+Tasks I handled:
+Creating EKS clusters
+Provisioning EC2 instances
+Configuring VPC, subnets, security groups
+Managing IAM roles and policies
+Example answer:
+I wrote Terraform modules to provision AWS infrastructure such as EKS clusters, EC2 instances, VPC networks, and IAM roles. This helped us maintain consistent environments across development, testing, and production.
+⚙️ Jenkins (CI/CD Automation)
+I designed and maintained Jenkins pipelines.
+Pipeline stages included:
+Code checkout from Git
+Build using Maven
+Code quality scanning
+Docker image build
+Push image to container registry
+Deploy to Kubernetes
+Example answer:
+I created Jenkins pipelines using Groovy scripts to automate the entire CI/CD workflow including build, test, security scans, containerization, and deployment to Kubernetes.
+🐳 Docker (Containerization)
+Docker was used to package applications.
+Tasks:
+Created Dockerfiles
+Built application images
+Managed image versions
+Pushed images to registry
+Example answer:
+I containerized applications using Docker to ensure consistent environments across development and production.
+☸️ Kubernetes (Container Orchestration)
+Applications were deployed on AWS EKS Kubernetes clusters.
+Tasks:
+Deployments and services
+Helm charts
+ConfigMaps and Secrets
+Troubleshooting CrashLoopBackOff
+Example answer:
+I deployed applications on Kubernetes using deployment manifests and Helm charts. I also monitored pod health and resolved issues such as CrashLoopBackOff and resource allocation problems.
+📊 Monitoring & Logging
+We used monitoring tools to track system health.
+Tools used:
+Prometheus – metrics monitoring
+CloudWatch – logs and alerts
+ELK stack – log analysis
+Example answer:
+I implemented monitoring using Prometheus and CloudWatch to track application metrics, logs, and system health. Alerts were configured to detect failures early.
+🔐 DevSecOps
+Security checks were integrated into the pipeline.
+Tools used:
+SonarQube – code quality
+Vulnerability scanning during builds
+Example answer:
+I integrated SonarQube into the Jenkins pipeline to automatically scan code for vulnerabilities and maintain code quality before deployment.
+🔄 CI/CD Workflow
+Our CI/CD flow looked like this:
+1️⃣ Developer pushes code → Git
+2️⃣ Jenkins triggers pipeline
+3️⃣ Build & test executed
+4️⃣ SonarQube scan runs
+5️⃣ Docker image built
+6️⃣ Image pushed to registry
+7️⃣ Application deployed to Kubernetes
+Example summary answer:
+Our CI/CD pipeline automated the process from code commit to deployment in Kubernetes, enabling faster and more reliable releases.
