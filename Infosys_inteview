@@ -1,0 +1,176 @@
+☁️ AWS & Networking
+❓ What kind of work have you done in AWS?
+Answer:
+“I’ve mainly worked on provisioning and managing cloud infrastructure in AWS. I used Terraform to create resources like Amazon EC2, VPC, subnets, and IAM roles. I also configured Amazon S3 for storage, set up load balancers for high availability, and used Amazon CloudWatch for monitoring and alerts.”
+
+❓ What is EC2?
+Answer:
+“EC2 is a virtual server in AWS. We use it to host applications. It’s scalable, so we can increase or decrease capacity based on traffic.”
+
+❓ How do you create an EC2 instance?
+Answer:
+“Either through the console or Terraform. In general, I select an AMI, choose instance type, configure VPC and subnet, attach storage, assign a security group, and launch using a key pair.”
+
+❓ What is VPC?
+Answer:
+“A VPC is a private network in AWS where we deploy our resources. It gives full control over IP range, routing, and security.”
+
+❓ Public vs Private Subnet?
+Answer:
+“Public subnets have internet access via an Internet Gateway, so we place resources like load balancers there. Private subnets don’t have direct internet access—we place backend servers or databases there for security.”
+
+❓ How does a private subnet access the internet?
+Answer:
+“We use a NAT Gateway. It allows outbound internet access for updates or downloads but blocks inbound traffic.”
+
+❓ What is NACL?
+Answer:
+“NACL is a subnet-level firewall. It’s stateless, meaning we have to define both inbound and outbound rules explicitly.”
+
+❓ How do you secure a private subnet?
+Answer:
+“By using security groups at instance level and NACLs at subnet level. Also, no direct internet gateway is attached.”
+
+
+📦 Storage & Monitoring
+❓ What is S3?
+Answer:
+“S3 is an object storage service used to store files like backups, logs, and static website content.”
+
+❓ What is CloudWatch? How did you use it?
+Answer:
+“CloudWatch is used for monitoring logs and metrics. I configured alarms for CPU usage and memory, and set alerts using SNS when thresholds were crossed.”
+
+⚖️ Load Balancing & Availability
+❓ What is a Load Balancer?
+Answer:
+“It distributes incoming traffic across multiple servers to ensure reliability and avoid overload.”
+
+❓ Application Load Balancer?
+Answer:
+“It works at Layer 7 and routes traffic based on URL paths or hostnames.”
+
+❓ What is High Availability?
+Answer:
+“It means the application remains accessible without downtime.”
+
+❓ How do you achieve it?
+Answer:
+“By deploying resources across multiple availability zones, using load balancers, and enabling auto-scaling.”
+
+🏗️ Terraform
+❓ What is Terraform?
+Answer:
+“It’s an Infrastructure as Code tool used to provision AWS resources using configuration files.”
+❓ Common commands?
+Answer:
+“I regularly use terraform init, plan, apply, and destroy.”
+
+❓ What are modules?
+Answer:
+“Reusable code blocks to avoid duplication and improve maintainability.”
+
+❓ What is state file?
+Answer:
+“It stores the current infrastructure state so Terraform knows what changes to apply.”
+
+❓ What if state file is deleted?
+Answer:
+“If backup exists, I restore it. Otherwise, I can import existing resources back into Terraform.”
+
+🔐 IAM
+❓ What is IAM?
+Answer:
+“IAM manages users, roles, and permissions in AWS.”
+
+❓ What is a policy?
+Answer:
+“It’s a JSON document that defines access permissions.”
+
+🐧 Scripting
+❓ Have you used Bash or Python?
+
+Answer:
+“Yes, I’ve used Bash for automation tasks like deployments, backups, and monitoring scripts.”
+
+❓ How do you debug Bash?
+Answer:
+“I use set -x, logs, and echo statements to trace execution.”
+
+🐳 Docker & Kubernetes
+❓ Docker architecture?
+Answer:
+“It has a client, daemon, and registry. The client sends commands to the daemon to build and run containers.”
+
+❓ Dockerfile vs Image?
+Answer:
+“A Dockerfile is a set of instructions, and an image is the built result.”
+
+❓ Kubernetes architecture?
+Answer:
+“Kubernetes has master components like API server and scheduler, and worker nodes that run pods.”
+
+🔁 CI/CD & Jenkins
+❓ What is CI/CD?
+Answer:
+“It automates code integration, testing, and deployment.”
+
+❓ Tools used?
+Answer:
+“I’ve used Jenkins for pipelines along with Git, Maven, and Docker.”
+
+❓ Declarative pipeline?
+Answer:
+“It’s a structured pipeline with defined stages like build, test, and deploy using a Jenkinsfile.”
+
+❓ Dynamic variables?
+Answer:
+“Using environment variables or parameters in Jenkins pipeline.”
+
+❓ Shared libraries?
+Answer:
+“They allow reuse of common pipeline code across projects.”
+
+☕ Maven
+❓ What is Maven?
+
+Answer:
+“Apache Maven is used to build and manage Java applications.”
+
+❓ Commands?
+Answer:
+“I’ve used mvn clean install and mvn package.”
+
+🔐 DevSecOps
+❓ DevOps vs DevSecOps?
+Answer:
+“DevOps focuses on speed and automation, while DevSecOps integrates security into every stage.”
+
+❓ Tools used?
+Answer:
+“I’ve worked with SonarQube for code quality and security checks.”
+
+🧪 Testing
+❓ What is testing?
+Answer:
+“It ensures the application works as expected and is bug-free.”
+
+❓ Manual testing?
+Answer:
+“Testing done without automation tools.”
+
+❓ Black box vs White box?
+Answer:
+“Black box tests functionality without seeing code, white box tests internal logic.”
+
+❓ Testing phases?
+Answer:
+“Unit, integration, system, and user acceptance testing.”
+
+❓ Cloud testing?
+Answer:
+“Testing applications and infrastructure in cloud environments.”
+
+❓ How do you test infrastructure?
+Answer:
+“I validate Terraform code, run health checks, and monitor using CloudWatch.”
