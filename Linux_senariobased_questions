@@ -1,0 +1,256 @@
+For ANY scenario, always answer like:
+👉 Step 1: Identify issue
+👉 Step 2: Check system (CPU, memory, disk, network)
+👉 Step 3: Check logs
+👉 Step 4: Fix issue
+👉 Step 5: Prevent recurrence
+
+
+
+
+🔥 1. High CPU Issue
+❓ Scenario:
+Production server CPU is 100%. What will you do?
+👉 Answer:
+First, I check system load using uptime or top.
+Then I identify the process consuming CPU using top or ps aux --sort=-%cpu.
+I verify if it’s expected or abnormal.
+Then I check logs related to that process.
+If required, I restart or kill the process.
+Finally, I analyze root cause to prevent recurrence.
+💾 2. Disk Full Issue
+❓ Scenario:
+Server disk is full. Application stopped.
+👉 Answer:
+I check disk usage using df -h and identify large directories using du -sh *.
+If space is not visible, I check for deleted files using lsof | grep deleted.
+I clear logs or unnecessary files.
+If needed, I extend disk using LVM.
+Then I restart the application.
+🌐 3. Server Not Reachable
+❓ Scenario:
+You cannot SSH into server.
+👉 Answer:
+I check network connectivity using ping.
+Then verify IP using ip a.
+I check if SSH service is running using systemctl status sshd.
+I verify firewall rules.
+If still failing, I check logs in /var/log/auth.log.
+🌍 4. Website Not Loading
+❓ Scenario:
+Website is down.
+👉 Answer:
+I check DNS resolution using nslookup.
+Then check server reachability using ping.
+I verify if port 80/443 is open using ss -tuln.
+Then I check web server status (nginx/apache).
+Finally, I review application logs.
+🔐 5. Permission Issue
+❓ Scenario:
+User cannot access a file.
+👉 Answer:
+I check file permissions using ls -l.
+Then verify ownership.
+If needed, I update permissions using chmod or chown.
+Also check if SELinux is blocking access.
+⚙️ 6. Service Not Starting
+❓ Scenario:
+Service fails to start.
+👉 Answer:
+I check status using systemctl status.
+Then check logs using journalctl -u <service>.
+I identify configuration errors or port conflicts.
+Fix the issue and restart service.
+💾 7. LVM Extension
+❓ Scenario:
+Need to increase disk space without downtime.
+👉 Answer:
+I extend logical volume using lvextend.
+Then resize filesystem using resize2fs or xfs_growfs.
+This can be done without downtime.
+📡 8. Network Issue Between Servers
+❓ Scenario:
+Two servers cannot communicate.
+👉 Answer:
+I check IP configuration using ip a.
+Then test connectivity using ping.
+If failed, I check routing using ip route.
+I verify firewall rules and security groups.
+If needed, I use tcpdump to analyze packets.
+🔄 9. Backup Failure
+❓ Scenario:
+Backup job failed.
+👉 Answer:
+I check logs of backup tool.
+Verify storage availability.
+Check permissions on backup directory.
+Re-run backup manually and fix issue.
+Ensure alerting is configured.
+🖥️ 10. VM Performance Issue
+❓ Scenario:
+VM is slow.
+👉 Answer:
+I check CPU, memory usage inside VM.
+Then check host resource usage (VMware).
+Verify if resources are over-allocated.
+Check disk I/O performance.
+Optimize or increase resources if needed.
+🔥 11. DNS Issue
+❓ Scenario:
+DNS not resolving.
+👉 Answer:
+I check /etc/resolv.conf.
+Test using nslookup.
+Verify DNS server reachability.
+Restart DNS service if required.
+🔐 12. Security Incident
+❓ Scenario:
+Suspicious login detected.
+👉 Answer:
+I check logs (/var/log/auth.log).
+Identify IP and block using firewall.
+Disable compromised user.
+Change passwords and enforce policies.
+Audit system for further issues.
+📊 13. Monitoring Alert
+❓ Scenario:
+High memory alert from Prometheus.
+👉 Answer:
+I check memory usage using free -m.
+Identify process using top.
+Check for memory leaks.
+Restart service if needed.
+Tune application or increase memory.
+⚠️ Golden Pattern (VERY IMPORTANT)
+For ANY scenario, follow this structure:
+👉 Say this:
+“First I verify the issue, then identify root cause using system tools, fix the issue, and finally ensure it doesn’t happen again.”
+
+
+
+🔥 1. Load Average High but CPU Low
+❓ Scenario:
+Load average is high, but CPU usage is low.
+👉 Answer:
+High load with low CPU usually indicates processes are waiting for I/O.
+I check using iostat or top (wa - wait time).
+Then I check disk I/O using iotop.
+Identify slow disk or heavy read/write process.
+Optimize disk or move workload.
+💾 2. Disk Space Increasing Automatically
+❓ Scenario:
+Disk keeps filling up automatically.
+👉 Answer:
+I check which directory is growing using du.
+Then monitor real-time changes using watch du.
+Check logs or application generating files.
+Implement log rotation or cleanup.
+🌐 3. Intermittent Network Issue
+❓ Scenario:
+Application works sometimes, fails sometimes.
+👉 Answer:
+I suspect network instability.
+I test using continuous ping.
+Use tcpdump to analyze packet drops.
+Check DNS latency.
+Verify load balancer or firewall.
+🔐 4. SSH Taking Too Long
+❓ Scenario:
+SSH login is very slow.
+👉 Answer:
+Usually due to DNS reverse lookup delay.
+I check /etc/ssh/sshd_config and disable UseDNS.
+Also check network latency and authentication delays.
+⚙️ 5. Service Running but Not Responding
+❓ Scenario:
+Service is active but not working.
+👉 Answer:
+I check if port is listening using ss -tuln.
+Then test locally using curl localhost.
+Check logs for errors.
+Verify dependencies (DB, network).
+💾 6. Mount Point Not Accessible
+❓ Scenario:
+NFS mount not working.
+👉 Answer:
+I check mount using mount command.
+Verify NFS server availability.
+Check network connectivity.
+Check firewall ports (2049).
+Remount if needed.
+🔄 7. Cron Job Not Running
+❓ Scenario:
+Scheduled job not executing.
+👉 Answer:
+I check crontab using crontab -l.
+Verify cron service status.
+Check logs (/var/log/syslog).
+Ensure correct permissions and paths.
+🖥️ 8. Server Rebooted Unexpectedly
+❓ Scenario:
+Server restarted automatically.
+👉 Answer:
+I check logs using last and journalctl.
+Look for kernel panic or OOM issues.
+Check hardware or cloud events.
+Identify root cause and fix.
+📡 9. Port Accessible Locally but Not Remotely
+❓ Scenario:
+App works on localhost but not from outside.
+👉 Answer:
+I check firewall rules.
+Verify service is listening on correct IP (0.0.0.0).
+Check security groups (cloud).
+Ensure port is open externally.
+🔐 10. Too Many Failed Login Attempts
+❓ Scenario:
+Multiple failed SSH attempts.
+👉 Answer:
+I check logs (auth.log).
+Block IP using firewall.
+Enable fail2ban.
+Disable root login.
+Use SSH keys.
+📊 11. Memory Leak Issue
+❓ Scenario:
+Memory keeps increasing over time.
+👉 Answer:
+I monitor memory using top.
+Identify process consuming memory.
+Check for memory leak in application.
+Restart service as temporary fix.
+Inform dev team for permanent fix.
+🌍 12. DNS Resolution Slow
+❓ Scenario:
+DNS queries taking too long.
+👉 Answer:
+I test using dig or nslookup.
+Check DNS server response time.
+Verify /etc/resolv.conf.
+Use faster DNS if needed.
+💥 13. System Hanging Frequently
+❓ Scenario:
+Server becomes unresponsive.
+👉 Answer:
+I check CPU, memory, disk usage.
+Look for high load or I/O wait.
+Check logs for errors.
+Identify problematic process.
+Optimize or restart.
+🔄 14. Backup Taking Too Long
+❓ Scenario:
+Backup job is slow.
+👉 Answer:
+I check network speed.
+Verify disk I/O.
+Optimize backup type (incremental).
+Schedule during low usage.
+🖥️ 15. VMware VM Not Starting
+❓ Scenario:
+VM fails to start.
+👉 Answer:
+I check host resources (CPU, RAM).
+Verify datastore availability.
+Check VM logs.
+Fix resource issue or restart host service.
+
