@@ -1,0 +1,74 @@
+These are all software security and quality tools, but they focus on different stages of development and types of risks. Here’s a clear breakdown of each and where they’re used:
+
+🔍 1. SonarQube
+Type: Code Quality & Static Application Security Testing (SAST)
+What it does:
+Analyzes source code for bugs, vulnerabilities, and code smells (bad practices).
+Where it’s used:
+During development (CI/CD pipelines or local scans).
+Example use:
+Developers run SonarQube to ensure code is clean and secure before merging.
+
+🛡️ 2. Black Duck (by Synopsys)
+Type: Software Composition Analysis (SCA)
+What it does:
+Scans open-source dependencies for known vulnerabilities and license risks.
+Where it’s used:
+When your project uses third-party libraries.
+Example use:
+Checking if a dependency has a CVE (known security flaw) or problematic license.
+
+📦 3. JFrog Xray
+Type: SCA + Artifact Security
+What it does:
+Scans binaries, packages, and container images for vulnerabilities.
+Where it’s used:
+Integrated with artifact repositories like JFrog Artifactory.
+Example use:
+Ensuring stored packages/images are safe before deployment.
+
+🐳 4. Anchore
+Type: Container Security Scanning
+What it does:
+Scans container images (like Docker) for vulnerabilities and policy compliance.
+Where it’s used:
+In containerized environments (e.g., Kubernetes pipelines).
+Example use:
+Checking a Docker image before pushing to production.
+
+🧠 5. Coverity (by Synopsys)
+Type: Advanced SAST
+What it does:
+Deep static analysis to detect complex security flaws and defects.
+Where it’s used:
+Enterprise-level codebases requiring high assurance.
+Example use:
+Finding memory leaks or concurrency issues in C/C++.
+
+🖥️ 6. Microsoft Defender
+Type: Endpoint Security / Threat Protection
+What it does:
+Protects systems from malware, ransomware, and advanced attacks.
+Where it’s used:
+On user machines, servers, and cloud environments.
+Example use:
+Detecting suspicious activity on a developer’s laptop or production server.
+
+🧩 How They Fit Together (Big Picture)
+Think of the software lifecycle:
+Code Stage
+SonarQube → Code quality & basic security
+Coverity → Deep code security analysis
+Dependency Stage
+Black Duck → Open-source risk analysis
+Build & Artifact Stage
+JFrog Xray → Scan stored artifacts
+Anchore → Scan container images
+Runtime / Endpoint
+Microsoft Defender → Protect running systems
+
+🧠 Simple Analogy
+SonarQube / Coverity: Check how you write your code
+Black Duck / Xray: Check what libraries you use
+Anchore: Check your containers
+Defender: Protect the environment where it runs
