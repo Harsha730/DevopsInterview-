@@ -1,0 +1,291 @@
+Explain Docker Architecture
+
+Docker follows a client–server architecture. It has several key components that work together to build, ship, and run containers.
+
+"Docker uses a client–server architecture. The Docker client sends commands to the Docker daemon, 
+which is responsible for building images, running containers, managing networks, and volumes. 
+Images are read-only templates stored locally or in a registry like Docker Hub. 
+When we run a container, Docker checks for the image locally or pulls it from a registry, then creates and runs the container. 
+Internally, Docker uses containerd and runc along with Linux kernel features like namespaces and cgroups for isolation and resource management."
+
+
+what is docker home directory?
+
+Docker does not have a single "home directory." Depending on the context:
+Docker stores its data (images, containers, volumes, networks) in /var/lib/docker on Linux by default. This is called the Docker Root Directory.
+Docker client configuration for a user is typically stored in ~/.docker.
+Inside a container, the home directory depends on the user running the container, commonly /root for the root user.
+
+How will you integrate a docker server in jenkins ?
+
+To integrate Docker with Jenkins, I install Docker on the Jenkins agent or connect Jenkins to a remote Docker host. 
+I grant Jenkins permission to access the Docker daemon, install Docker-related plugins if needed, 
+and then use Jenkins pipelines to build images, run containers, execute tests, and push images to a registry 
+such as Docker Hub or a private registry.
+For scalability, Jenkins can also provision dynamic Docker agents from a Docker server.
+
+write a docker file using a linux and a websever ?
+
+# Use Ubuntu Linux as base image
+FROM ubuntu:22.04
+
+# Update packages and install Nginx
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    apt-get clean
+
+# Expose HTTP port
+EXPOSE 80
+
+# Start Nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
+
+This Dockerfile uses Ubuntu as the base Linux image. It updates the package repository, installs the Nginx web server,
+exposes port 80, and starts Nginx in the foreground using the CMD instruction.
+Running Nginx in the foreground is important because the container exits when the main process stops.
+
+CMD ['nginx', '-g', 'daemon off;'] starts the Nginx web server when the container launches.
+The daemon off; directive keeps Nginx in the foreground. Since Docker containers run as long as their main process is active,
+running Nginx in the foreground prevents the container from exiting immediately."
+
+Difference between CMD and ENTRYPOIN ?
+
+"ENTRYPOINT defines the main process that always runs inside the container,
+while CMD provides default arguments for that process. 
+CMD can be overridden by passing arguments to docker run, 
+whereas ENTRYPOINT remains fixed unless explicitly overridden using --entrypoint.
+A common practice is to use ENTRYPOINT for the executable and CMD for its default parameters."
+
+What is Docker Network?
+
+"Docker networking allows containers to communicate with each other, the host system, and external networks.
+Docker provides different network drivers such as bridge, host, none, and overlay. 
+The bridge network is the default and is commonly used for communication between containers on the same host.
+In real-world applications, I create a custom bridge network so containers can communicate using container names instead of IP addresses, 
+which simplifies service discovery and management."
+
+What are Docker Volumes?
+
+"Docker volumes provide persistent storage for containers. 
+By default, data inside a container is lost when the container is removed. 
+Volumes store data outside the container's filesystem, allowing it to survive container restarts, upgrades, and recreations. 
+They are commonly used for databases, application logs, uploaded files, and any data that must persist.
+Docker manages volumes separately from containers, making them the preferred storage solution in production environments."
+
+Docker Images vs Containers ?
+
+An image is a read-only template; a container is a running instance of that image.
+
+Docker Lifecycle
+Commands:
+docker create
+docker start
+docker stop
+docker restart
+docker pause
+docker unpause
+docker rm
+Container states:
+Created
+Running
+Paused
+Exited
+Removed
+
+Dockerfile Instructions: ????
+
+FROM ---- Defines the base image for the Docker image. Must be the first instruction.   FROM ubuntu:22.04
+RUN  ---- Executes commands during image build and creates a new image layer.           RUN apt-get update && apt-get install -y nginx
+COPY ---  Copies files/directories from the host to the image.                          COPY app.jar /app/
+ADD  ---  Similar to COPY, but can extract local tar files and download URLs.           ADD app.tar.gz /app/
+WORKDIR --- Sets the working directory for subsequent instructions                      WORKDIR /app
+ENV     --- Sets environment variables inside the container.                            ENV JAVA_HOME=/usr/lib/jvm/java-17
+EXPOSE  --- Documents the port the container listens on.                                EXPOSE 8080
+CMD    --- Specifies the default command/arguments when the container starts.           CMD ["java","-jar","app.jar"]
+ENTRYPOINT --- Defines the main executable that always runs.                            ENTRYPOINT ["java","-jar"]
+ARG --- Defines build-time variables available during image build only.                 ARG VERSION=1.0
+USER --- Specifies the user to run the container as.                                    USER appuser
+LABEL---- Adds metadata to the image.                                                   LABEL maintainer="devops@example.com"
+
+Container is running but application is not accessible. What will you do?
+Answer:
+First I will debug step by step:
+Check container status:
+docker ps
+Check logs:
+docker logs <container_id>
+Check port mapping:
+docker port <container_id>
+Verify application is listening inside container:
+docker exec -it <container_id> sh
+netstat -tulnp
+Common issue: app running on wrong port or not exposed using -p.
+
+
+Container exits immediately after starting. Why?
+Answer:
+
+Common reasons:
+Main process finished
+Missing foreground process
+Wrong CMD/ENTRYPOINT
+
+Check logs:
+docker logs <container>
+
+Fix:
+Ensure long-running process (e.g. nginx, java app)
+Use:
+CMD ["nginx", "-g", "daemon off;"]
+
+How do you reduce Docker image size?
+
+Answer:
+Use lightweight base image (Alpine)
+Use multi-stage builds
+Remove unnecessary packages
+Combine RUN commands
+Use .dockerignore
+
+Example:
+FROM alpine
+
+Database data is lost after container restart. Why?
+
+Answer:
+Because no volume was used.
+
+Fix:
+docker run -v db-data:/var/lib/mysql mysql
+Use Docker volumes for persistence
+
+Two containers need to communicate. How?
+Answer:
+
+Create a custom network:
+
+docker network create mynet
+docker run --network mynet --name app myapp
+docker run --network mynet --name db mysql
+
+Then access DB using:
+db:3306
+
+How will you debug a failed container?
+Answer:
+
+Steps:
+docker ps -a
+docker logs <container>
+docker inspect <container>
+docker exec -it <container> sh
+
+Also check:
+Exit code
+Memory issues
+Missing dependencies
+
+Application works locally but not in container. Why?
+Answer:
+
+Possible reasons:
+Missing environment variables
+Port not exposed
+Dependency missing in image
+File path issue
+Wrong base image
+
+Debug using:
+docker exec -it <container> env
+
+How do you update a running container without downtime?
+Answer:
+
+Docker does not support direct update.
+
+Solution:
+Build new image
+Run new container
+Use load balancer / blue-green deployment
+
+Example:
+docker stop old
+docker run new
+
+Container is consuming high CPU/memory. What will you do?
+Answer:
+Check stats:
+docker stats
+
+Then:
+Optimize application
+Limit resources:
+docker run --memory="512m" --cpus="1"
+
+How do you share Docker images between environments?
+Answer:
+
+Use registry:
+Push image:
+docker push myrepo/app:1.0
+Pull image:
+docker pull myrepo/app:1.0
+
+Registries:
+Docker Hub
+Amazon Web Services ECR
+Google Artifact Registry
+
+How do you handle secrets in Docker?
+Answer:
+
+Do NOT hardcode secrets.
+
+Use:
+Environment variables
+Docker secrets (Swarm)
+External secret managers (Vault, AWS Secrets Manager)
+
+Container cannot connect to external internet. Why?
+Answer:
+
+Check:
+Network mode (none?)
+DNS issue
+Firewall rules
+
+Test:
+ping google.com
+
+Fix:
+--network bridge
+
+How do you persist logs from containers?
+Answer:
+
+Use volume:
+-v /host/logs:/var/log/app
+
+Or logging drivers:
+docker run --log-driver json-file
+
+Docker build is slow. How do you improve it?
+
+Answer:
+Use layer caching
+Order Dockerfile properly
+Use .dockerignore
+Use multi-stage builds
+
+Container works on dev but fails in production?
+
+Answer:
+Check:
+Environment variables
+Image version mismatch
+Dependency differences
+Network configuration
+Volume mounts
+
+
+
